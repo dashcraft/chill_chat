@@ -1,0 +1,58 @@
+{
+  "name": "chill_chat",
+  "version": "0.0.1",
+  "description": "A Social chat app that purges data after 48 hours, OAuth and socket.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashcraft/chill_chat.git"
+  },
+  "keywords": [
+    "chat",
+    "app",
+    "social",
+    "socketio",
+    "oauth"
+  ],
+  "author": "Daniel Ashcraft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dashcraft/chill_chat/issues"
+  },
+  "homepage": "https://github.com/dashcraft/chill_chat#readme",
+  "dependencies": {
+    "angular": "^1.5.9",
+    "angular-animate": "^1.5.9",
+    "angular-aria": "^1.5.9",
+    "angular-messages": "^1.5.9",
+    "angular-resource": "^1.5.9",
+    "angular-socket-io": "^0.7.0",
+    "angular-ui-router": "^0.3.2",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.2",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.7.0",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "path": "^0.12.7",
+    "socket.io": "^1.6.0",
+    "socket.io-client": "^1.6.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-livereload": "^0.1.2",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2",
+    "jasmine": "^2.5.2",
+    "karma": "^1.3.0"
+  }
+}
