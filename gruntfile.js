@@ -68,8 +68,8 @@ module.exports = function(grunt) {
     	dev:{
     		script:'./server/server.js'
     	},
-
     },
+
     mochaTest: {
       test: {
         options: {
