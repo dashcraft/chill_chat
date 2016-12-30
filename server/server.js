@@ -1,9 +1,9 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser')
-const morgan = require('morgan');
-const path = require('path');
-const config = require('./config/configs');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser')
+var morgan = require('morgan');
+var path = require('path');
+var config = require('./config/configs');
 
 
 
@@ -22,7 +22,7 @@ app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '/app'));
 
-let port = config.port;
+var port = config.port;
 app.listen(port);
 
 
