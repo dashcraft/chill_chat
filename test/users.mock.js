@@ -9,7 +9,7 @@ require('sinon-mongoose');
 var User = require('../server/users/users.model');
 
 
- describe("Get all todos", function(){
+/* describe("Get all todos", function(){
          // Test will pass if we get all todos
         it("should return all todos", function(done){
             var TodoMock = sinon.mock(Todo);
@@ -35,4 +35,4 @@ var User = require('../server/users/users.model');
                 done();
             });
         });
-    });
+    });*/
