@@ -1,9 +1,12 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser')
-const morgan = require('morgan');
-const path = require('path');
-const config = require('./config/configs');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser')
+var morgan = require('morgan');
+var path = require('path');
+var config = require('./config/configs');
+var debug = require('debug')('workspace:server');
+var http = require('http');
+var routes = require('../public/routes/index');
 
 
 
@@ -22,9 +25,84 @@ app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '/app'));
 
-let port = config.port;
-app.listen(port);
+// view engine setup
+app.set('views', path.join(__dirname, '../public/views'));
+app.set('view engine', 'ejs');
 
+app.use('/', routes);
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
+/**
+ * Create HTTP server.
+ */
 
-console.log('App is listening on', port);
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
