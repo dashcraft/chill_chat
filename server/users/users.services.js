@@ -1,3 +1,3 @@
-let User = require('./users.model');
-let _ = require('lodash');
-let bcrypt = require('bcryptjs');
+var User = require('./users.model');
+var _ = require('lodash');
+var bcrypt = require('bcryptjs');
