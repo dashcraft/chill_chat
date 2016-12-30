@@ -5,8 +5,8 @@ var morgan = require('morgan');
 var path = require('path');
 var config = require('./config/configs');
 var debug = require('debug')('workspace:server');
-var http = require('http');
-var routes = require('../public/routes/index');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 
 
@@ -21,15 +21,25 @@ app.use(function(req, res, next) {
 });
 
 
+
 app.use(morgan('dev'));
-
 app.use(express.static(__dirname + '/app'));
+app.use('/public', express.static(__dirname+ '../public'));
+app.use('/lib', intercept,express.static(__dirname+ '../node_modules'));
 
-// view engine setup
-app.set('views', path.join(__dirname, '../public/views'));
-app.set('view engine', 'ejs');
+function intercept(req,res,next){
+	console.log('the lib route is being requested');
+	next();
+}
 
-app.use('/', routes);
+
+app.all('/', function (req, res) {
+  console.log('only the index file is being returned');
+  res.sendFile('./index.html', { "root": "../chill_chat/public/views/" });
+})
+
+
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -37,7 +47,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = http;
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -46,6 +56,26 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
+
+
+
+
+// Socket io connection, 
+// for real time server
+
+io.on('connection', function(socket){
+	console.log('there was a connection!!!');
+
+})
+
+
+
+
+
+
+
 
 /**
  * Normalize a port into a number, string, or false.

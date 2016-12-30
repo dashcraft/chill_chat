@@ -44,8 +44,8 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "path": "^0.12.7",
-    "socket.io": "^1.6.0",
-    "socket.io-client": "^1.6.0"
+    "socket.io": "^1.7.2",
+    "socket.io-client": "^1.7.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
