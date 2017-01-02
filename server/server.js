@@ -26,8 +26,7 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/app'));
 app.use('/public', express.static(__dirname+ '../public'));
 /*app.use('/lib', intercept,express.static(__dirname+ '../node_modules'));*/
-app.use('/lib', intercept, express.static(('node_modules')));
-
+app.use('/lib', intercept, express.static(('bower_components')));
 function intercept(req,res,next){
 	console.log('the lib route is being requested');
 	next();
