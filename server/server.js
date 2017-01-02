@@ -33,7 +33,7 @@ function intercept(req,res,next){
 }
 
 
-app.all('/', function (req, res) {
+app.use('/', function (req, res) {
   console.log('only the index file is being returned');
   res.sendFile('./index.html', { "root": "../chill_chat/public/views/" });
 })
