@@ -23,7 +23,6 @@ app.use(function(req, res, next) {
 
 
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '/app'));
 app.use('/public', express.static(__dirname+ '../public'));
 /*app.use('/lib', intercept,express.static(__dirname+ '../node_modules'));*/
 app.use('/lib', intercept, express.static(('bower_components')));
@@ -60,8 +59,6 @@ server.on('listening', onListening);
 
 
 
-
-
 // Socket io connection, 
 // for real time server
 
@@ -69,9 +66,6 @@ io.on('connection', function(socket){
 	console.log('there was a connection!!!');
 
 })
-
-
-
 
 
 

@@ -23,22 +23,29 @@ module.exports = function(grunt) {
     watch:{
     	js:{
     		files:['gruntfile.js','public/controllers/*.js','public/services/*.js'],
-    		tasks:['jshint','concat:js','mocha']
+    		tasks:['jshint','concat:js','mochaTest'],
+        options:{
+          livereload:true
+        },
     	},
     	css:{
     		files:['public/css/styles.css'],
     		tasks:['concat:css'],
+        options:{
+          livereload:true,
+        },
     	},
     	server:{
     		files:['server/*/*.js'],
-    		tasks:['jshint','mocha'],
+    		tasks:['jshint','mochaTest'],
     		options:{
     			interrupt:true,
+          livereload:true,
     		},
     	},
     	tests:{
     		files:['./test/*.js','./karma/*.js','./test/*.html'],
-    		tasks:['jshint','mocha'],
+    		tasks:['jshint','mochaTest']
     	},
 
     },
@@ -56,7 +63,7 @@ module.exports = function(grunt) {
     //concurrent stuffs
     concurrent:{
     	dev:{
-    		tasks:['nodemon','watch','mochaTest'],
+    		tasks:['nodemon','watch','mochaTest','open'],
     	},
     	options: {
       		logConcurrentOutput: true,
@@ -69,7 +76,11 @@ module.exports = function(grunt) {
     		script:'./server/server.js'
     	},
     },
-
+    open: {
+      dev: {
+        url: 'http://localhost:3000'
+      }
+    },
     mochaTest: {
       test: {
         options: {
@@ -81,10 +92,6 @@ module.exports = function(grunt) {
         src: ['test/*.js'],
       }
     },
-    
-   
-
-
   });
 
 
@@ -97,10 +104,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-mocha-test');
-
+  grunt.loadNpmTasks('grunt-open');
 
 
   // Default task(s).
-  grunt.registerTask('start', ['concurrent']);
+  grunt.registerTask('default', ['concurrent']);
 
 };
