@@ -1,17 +1,37 @@
 var express = require('express');
-var app = express();
-var bodyParser = require('body-parser')
-var morgan = require('morgan');
 var path = require('path');
+var morgan = require('morgan');
+var bodyParser = require('body-parser')
+var mongoose = require('mongoose');
+var passport = require('passport');
 var config = require('./config/configs');
+require('../models/Users');
+require('./config/passport');
+
+var apiRoutes = require('./routes/api');
+
+var app = express();
 var debug = require('debug')('workspace:server');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+mongoose.connect('mongodb://rawlejuglal-chill-chat-4402871/chill_chat')
 
+var db = mongoose.connection
 
+db.on('error', console.error.bind(console, 'connection error:'))
+
+db.once('open', dbCallback)
+
+function dbCallback() {
+  console.log('Connected to database')
+}
+
+app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,7 +42,7 @@ app.use(function(req, res, next) {
 
 
 
-app.use(morgan('dev'));
+
 app.use(express.static(__dirname + '/app'));
 app.use('/public', express.static(__dirname+ '../public'));
 /*app.use('/lib', intercept,express.static(__dirname+ '../node_modules'));*/
@@ -32,6 +52,7 @@ function intercept(req,res,next){
 	next();
 }
 
+app.use('/api', apiRoutes);
 
 app.use('/', function (req, res) {
   console.log('only the index file is being returned');

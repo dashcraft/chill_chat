@@ -4,7 +4,8 @@
   "description": "A Social chat app that purges data after 48 hours, OAuth and socket.io",
   "main": "server.js",
   "scripts": {
-    "start": "grunt start"
+    "start": "grunt start",
+    "watch": "nodemon ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -36,13 +37,16 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "^4.14.0",
+    "express-jwt": "^5.1.0",
     "fs": "0.0.1-security",
+    "jsonwebtoken": "^7.2.1",
     "lodash": "^4.17.2",
     "mongodb": "^2.2.11",
     "mongoose": "^4.7.0",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2"
